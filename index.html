@@ -8,19 +8,59 @@
     <meta name="google-site-verification" content="CI8r8upGLNqw9n7fDZE_hgsk8RdD3grDMgFq_js9m1Q" />
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="satishaviator - Play the best crash game online. Real-time flying and betting experience.">
-    <meta name="keywords" content="satishaviator, satish aviator, aviator game, Satish Coder, Crash Game">
+    <meta name="description" content="satishaviator - The Most Advanced Crash Game. Real-time flying, betting, and 100x multipliers!">
+    <meta name="keywords" content="satishaviator, satish aviator, aviator game, Satish Coder, Khatarnak Aviator, Crash Game">
     <meta name="author" content="Satish Coder">
-    
-    <!-- FAVICON (Red Plane PNG) -->
-    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/512/e50914/airplane-take-off.png">
-    <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/512/e50914/airplane-take-off.png">
 
-    <!-- OPEN GRAPH (WhatsApp, FB par Red Plane Image ke liye) -->
-    <meta property="og:title" content="satishaviator - Aviator Game">
-    <meta property="og:description" content="Click here to play satishaviator! Best real-time flying crash game.">
-    <meta property="og:image" content="https://img.icons8.com/ios-filled/512/e50914/airplane-take-off.png">
+    <!-- 1. GOOGLE MOBILE SEARCH THUMBNAIL (Special tag for Google Search) -->
+    <meta name="thumbnail" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=600&q=80" />
+    
+    <!-- 2. OPEN GRAPH (WhatsApp, FB Link Preview - Badi aur Khatarnak Image) -->
+    <meta property="og:title" content="satishaviator - Play the Ultimate Aviator Game">
+    <meta property="og:description" content="Click here to play satishaviator! Real-time flying, highest multipliers, cash out before it flies away!">
+    <!-- Khatarnak Jet Image Link -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=80">
     <meta property="og:type" content="website">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="600">
+
+    <!-- 3. TWITTER CARD (Bade size ka link preview dikhane ke liye) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="satishaviator - Pro Crash Game">
+    <meta name="twitter:description" content="The best crash game online. Bet, Fly, and Win!">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=80">
+
+    <!-- FAVICON (Browser tab image - Red Icon) -->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/512/e50914/fighter-jet.png">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/512/e50914/fighter-jet.png">
+
+    <!-- 4. GOOGLE PAGEMAP (Google ko force karne ke liye ki search result me photo dikhaye) -->
+    <!--
+      <PageMap>
+        <DataObject type="thumbnail">
+          <Attribute name="src" value="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=100&q=80"/>
+          <Attribute name="width" value="100"/>
+          <Attribute name="height" value="100"/>
+        </DataObject>
+      </PageMap>
+    -->
+
+    <!-- 5. GOOGLE SCHEMA MARKUP -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "satishaviator",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "image": "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=80",
+      "description": "satishaviator - The best crash game online. Real-time flying and betting experience by Satish Coder.",
+      "author": {
+        "@type": "Person",
+        "name": "Satish Coder"
+      }
+    }
+    </script>
     
     <title>satishaviator - Aviator</title>
     
@@ -120,9 +160,15 @@
         #gate h1 { color: var(--red); font-style: italic; margin-bottom: 30px; letter-spacing: 2px; cursor: pointer; }
         #gate button { padding: 18px 60px; background: var(--red); color: #fff; border: none; border-radius: 50px; font-size: 22px; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px rgba(229,9,20,0.4); transition: 0.3s; }
         #gate button:hover, .tap-plane:hover { transform: scale(1.05) rotate(-15deg); box-shadow: 0 0 50px rgba(229,9,20,0.6); }
+
+        /* Hidden image for extra Google safety */
+        .seo-image { display: none; }
     </style>
 </head>
 <body>
+
+    <!-- Hidden img tag to force Google to find the Khatarnak Image -->
+    <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=600&q=80" alt="satishaviator game plane thumbnail" class="seo-image">
 
     <div id="gate">
         <!-- Pure SVG Red Plane on Start Screen -->
