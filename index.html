@@ -9,13 +9,14 @@
     <meta name="keywords" content="satishaviator, satish aviator, aviator game, Satish Coder, Crash Game">
     <meta name="author" content="Satish Coder">
     
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/7893/7893979.png">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/7893/7893979.png">
+    <!-- FAVICON (Red Plane PNG) -->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/512/e50914/airplane-take-off.png">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/512/e50914/airplane-take-off.png">
 
+    <!-- OPEN GRAPH (WhatsApp, FB par Red Plane Image ke liye) -->
     <meta property="og:title" content="satishaviator - Aviator Game">
     <meta property="og:description" content="Click here to play satishaviator! Best real-time flying crash game.">
-    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/7893/7893979.png">
+    <meta property="og:image" content="https://img.icons8.com/ios-filled/512/e50914/airplane-take-off.png">
     <meta property="og:type" content="website">
     
     <title>satishaviator - Aviator</title>
@@ -36,10 +37,10 @@
 
         .bal-box { background: #000; padding: 6px 15px; border-radius: 20px; border: 1px solid var(--green); color: var(--green); font-weight: bold; font-size: 14px; box-shadow: 0 0 5px rgba(40,167,69,0.2); }
 
-        /* Game Area (Yahan Speed ka illusion banaya hai) */
+        /* Game Area (Speed Illusion) */
         .game-area { height: 280px; background: radial-gradient(circle at center, #1a1a1a, #000); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; margin: 10px; border-radius: 12px; border: 1px solid #222; flex-shrink: 0; }
         
-        /* Moving Background Grid (Ye uadte hue tezi se niche aayega) */
+        /* Moving Background Grid */
         .grid-layer {
             position: absolute; top: -50%; left: 0; width: 200%; height: 200%;
             background-image: 
@@ -244,7 +245,7 @@
             document.getElementById('timer').style.display = 'block';
             document.getElementById('curve').style.width = '0%';
             document.getElementById('plane').style.display = 'none';
-            gameArea.classList.remove('speed-up'); // Background animation band
+            gameArea.classList.remove('speed-up'); 
 
             [1, 2].forEach(id => {
                 let btn = document.getElementById('btn-'+id);
@@ -274,7 +275,6 @@
             document.getElementById('plane').style.display = 'block';
             document.getElementById('plane').classList.add('jet-active');
             
-            // Jese hi plane udega background grid animation chalu
             gameArea.classList.add('speed-up');
 
             flySnd.volume = 0.5;
@@ -315,7 +315,6 @@
             document.getElementById('multiplier').style.color = "#e50914";
             document.getElementById('plane').classList.remove('jet-active');
             
-            // Crash hote hi grid speed animation band
             gameArea.classList.remove('speed-up');
 
             [1,2].forEach(id => {
