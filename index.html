@@ -1,418 +1,394 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- GOOGLE SEARCH CONSOLE VERIFICATION -->
-    <meta name="google-site-verification" content="CI8r8upGLNqw9n7fDZE_hgsk8RdD3grDMgFq_js9m1Q" />
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="satishaviator - The Most Advanced Crash Game. Real-time flying, betting, and 100x multipliers!">
-    <meta name="keywords" content="satishaviator, satish aviator, aviator game, Satish Coder, Khatarnak Aviator, Crash Game">
-    <meta name="author" content="Satish Coder">
-
-    <!-- 1. GOOGLE MOBILE SEARCH THUMBNAIL (Special tag for Google Search) -->
-    <meta name="thumbnail" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=600&q=80" />
-    
-    <!-- 2. OPEN GRAPH (WhatsApp, FB Link Preview - Badi aur Khatarnak Image) -->
-    <meta property="og:title" content="satishaviator - Play the Ultimate Aviator Game">
-    <meta property="og:description" content="Click here to play satishaviator! Real-time flying, highest multipliers, cash out before it flies away!">
-    <!-- Khatarnak Jet Image Link -->
-    <meta property="og:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=80">
-    <meta property="og:type" content="website">
-    <meta property="og:image:width" content="800">
-    <meta property="og:image:height" content="600">
-
-    <!-- 3. TWITTER CARD (Bade size ka link preview dikhane ke liye) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="satishaviator - Pro Crash Game">
-    <meta name="twitter:description" content="The best crash game online. Bet, Fly, and Win!">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=80">
-
-    <!-- FAVICON (Browser tab image - Red Icon) -->
-    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/512/e50914/fighter-jet.png">
-    <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/512/e50914/fighter-jet.png">
-
-    <!-- 4. GOOGLE PAGEMAP (Google ko force karne ke liye ki search result me photo dikhaye) -->
-    <!--
-      <PageMap>
-        <DataObject type="thumbnail">
-          <Attribute name="src" value="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=100&q=80"/>
-          <Attribute name="width" value="100"/>
-          <Attribute name="height" value="100"/>
-        </DataObject>
-      </PageMap>
-    -->
-
-    <!-- 5. GOOGLE SCHEMA MARKUP -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "VideoGame",
-      "name": "satishaviator",
-      "applicationCategory": "GameApplication",
-      "operatingSystem": "Any",
-      "image": "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=80",
-      "description": "satishaviator - The best crash game online. Real-time flying and betting experience by Satish Coder.",
-      "author": {
-        "@type": "Person",
-        "name": "Satish Coder"
-      }
-    }
-    </script>
-    
-    <title>satishaviator - Aviator</title>
-    
-    <style>
-        /* --- CSS SECTION --- */
-        :root { --red: #e50914; --bg: #000; --panel: #1b1c1d; --green: #28a745; --yellow: #ffc107; }
-        
-        body { background: #050505; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; overflow: hidden; height: 100vh; }
-
-        .app { width: 100%; max-width: 500px; height: 100%; display: flex; flex-direction: column; position: relative; background: #000; border-left: 1px solid #333; border-right: 1px solid #333; }
-
-        /* Header */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: var(--panel); border-bottom: 2px solid var(--red); z-index: 20; }
-        .logo { display: flex; align-items: center; gap: 8px; color: var(--red); font-weight: 900; font-style: italic; font-size: 20px; text-shadow: 0 0 10px rgba(229,9,20,0.5); letter-spacing: 1px; cursor: pointer; transition: 0.2s; }
-        .logo:active { transform: scale(0.95); }
-        .logo svg { width: 28px; filter: drop-shadow(0 0 5px var(--red)); }
-
-        .bal-box { background: #000; padding: 6px 15px; border-radius: 20px; border: 1px solid var(--green); color: var(--green); font-weight: bold; font-size: 14px; box-shadow: 0 0 5px rgba(40,167,69,0.2); }
-
-        /* Game Area (Speed Illusion) */
-        .game-area { height: 280px; background: radial-gradient(circle at center, #1a1a1a, #000); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; margin: 10px; border-radius: 12px; border: 1px solid #222; flex-shrink: 0; }
-        
-        /* Moving Background Grid */
-        .grid-layer {
-            position: absolute; top: -50%; left: 0; width: 200%; height: 200%;
-            background-image: 
-                linear-gradient(rgba(229, 9, 20, 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(229, 9, 20, 0.15) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: 1; opacity: 0; transition: opacity 0.5s;
-        }
-        .speed-up .grid-layer {
-            opacity: 1;
-            animation: moveGrid 0.4s linear infinite;
-        }
-        @keyframes moveGrid {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-40px, 40px); }
-        }
-
-        .bg-text { position: absolute; font-size: 32px; font-weight: 900; color: rgba(255, 255, 255, 0.03); z-index: 0; text-transform: uppercase; letter-spacing: 5px; pointer-events: none; text-align: center; }
-
-        #multiplier { font-size: 70px; font-weight: 900; z-index: 10; text-shadow: 0 5px 15px #000; transition: color 0.1s; }
-        #timer { font-size: 40px; color: var(--yellow); z-index: 10; font-weight: bold; }
-
-        #curve { position: absolute; bottom: 0; left: 0; width: 0%; height: 0%; background: linear-gradient(to top right, rgba(229, 9, 20, 0.6), transparent); border-top: 4px solid var(--red); border-radius: 0 100% 0 0; z-index: 2; transition: 0.1s linear; }
-        
-        /* Red Plane SVG Styling */
-        #plane { position: absolute; bottom: -50px; left: -50px; width: 85px; z-index: 5; display: none; filter: drop-shadow(0 0 15px rgba(229,9,20,1)); transform: rotate(-20deg); }
-        .jet-active { animation: jetShake 0.05s infinite alternate; }
-        @keyframes jetShake { 
-            from { transform: translate(0,0) rotate(-20deg); } 
-            to { transform: translate(2px, 2px) rotate(-20deg); } 
-        }
-
-        /* Bet Section */
-        .bet-section { display: flex; gap: 8px; padding: 0 10px; margin-bottom: 10px; flex-shrink: 0; }
-        .bet-card { flex: 1; background: var(--panel); padding: 12px; border-radius: 10px; border: 1px solid #333; display: flex; flex-direction: column; gap: 8px; align-items: center; }
-        .bet-card input { width: 90%; background: #000; border: 1px solid #444; color: #fff; padding: 8px; border-radius: 5px; text-align: center; font-size: 18px; font-weight: bold; outline: none; }
-        .bet-card input:focus { border-color: var(--red); }
-
-        .btn { width: 100%; height: 50px; border: none; border-radius: 8px; font-weight: 900; font-size: 16px; cursor: pointer; text-transform: uppercase; transition: 0.1s ease; }
-        .btn-bet { background: var(--green); color: #fff; box-shadow: 0 4px 0 #1e7e34; }
-        .btn-waiting { background: var(--yellow); color: #000; box-shadow: 0 4px 0 #cc9a06; }
-        .btn-cashout { background: #ff9800; color: #fff; box-shadow: 0 4px 0 #e65100; }
-        .btn-lost { background: #333; color: #777; cursor: not-allowed; }
-
-        /* SCROLLABLE Fake Live Chat Section */
-        .chat-section { flex-grow: 1; background: var(--panel); margin: 0 10px 10px 10px; border-radius: 12px; padding: 10px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; min-height: 0; } 
-        .chat-header { font-size: 12px; color: #888; text-align: center; border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; }
-        
-        .chat-list { overflow-y: auto; flex-grow: 1; scrollbar-width: thin; scrollbar-color: #444 #111; padding-right: 5px; }
-        .chat-list::-webkit-scrollbar { width: 4px; }
-        .chat-list::-webkit-scrollbar-track { background: #111; }
-        .chat-list::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
-        
-        .chat-msg { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; border: 1px solid #1a1a1a; animation: slideIn 0.3s ease-out; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .user-box { display: flex; align-items: center; gap: 10px; }
-        .user-box img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #444; object-fit: cover; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
-        .user-name { font-weight: bold; color: #ddd; }
-        
-        .win-info { display: flex; flex-direction: column; align-items: flex-end; }
-        .win-mult { color: var(--green); font-weight: bold; font-size: 14px; }
-        .win-amt { color: #aaa; font-size: 12px; font-weight: bold; }
-
-        /* Highlight satishaviator */
-        .highlight-satish { border: 1px solid var(--red); background: rgba(229, 9, 20, 0.1); }
-        .highlight-satish .user-name { color: var(--red); font-weight: 900; }
-        .highlight-satish img { border-color: var(--red); box-shadow: 0 0 10px rgba(229,9,20,0.8); }
-
-        /* Tap to Play Overlay */
-        #gate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .tap-plane { width: 120px; cursor: pointer; filter: drop-shadow(0 0 20px rgba(229,9,20,0.8)); animation: floatPlane 2s infinite ease-in-out; margin-bottom: 10px; transform: rotate(-15deg); }
-        @keyframes floatPlane { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-15px) rotate(-15deg); } }
-        #gate h1 { color: var(--red); font-style: italic; margin-bottom: 30px; letter-spacing: 2px; cursor: pointer; }
-        #gate button { padding: 18px 60px; background: var(--red); color: #fff; border: none; border-radius: 50px; font-size: 22px; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px rgba(229,9,20,0.4); transition: 0.3s; }
-        #gate button:hover, .tap-plane:hover { transform: scale(1.05) rotate(-15deg); box-shadow: 0 0 50px rgba(229,9,20,0.6); }
-
-        /* Hidden image for extra Google safety */
-        .seo-image { display: none; }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SATISH RACER — 3D Car Game</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#000; overflow:hidden; font-family:'Segoe UI',sans-serif; }
+    #c { display:block; width:100vw; height:100vh; }
+    #ui { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:10; }
+    #hud { position:absolute; top:20px; left:50%; transform:translateX(-50%); display:flex; gap:40px; align-items:center; }
+    .hud-box { background:rgba(0,0,0,.55); backdrop-filter:blur(8px); border:1px solid rgba(255,128,0,.3); border-radius:10px; padding:10px 22px; text-align:center; }
+    .hud-label { font-size:.62rem; letter-spacing:.18em; color:#ff8000; text-transform:uppercase; }
+    .hud-val { font-size:1.7rem; font-weight:700; color:#fff; line-height:1.1; }
+    #speed-bar-wrap { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); width:320px; }
+    #speed-bar-bg { height:8px; background:rgba(255,255,255,.12); border-radius:99px; overflow:hidden; }
+    #speed-bar { height:100%; width:0%; background:linear-gradient(90deg,#ff8000,#ffdd00); border-radius:99px; transition:width .1s; }
+    #speed-label { text-align:center; color:rgba(255,255,255,.5); font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; margin-top:6px; }
+    #controls-hint { position:absolute; bottom:70px; right:24px; background:rgba(0,0,0,.55); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:12px 16px; font-size:.72rem; color:rgba(255,255,255,.55); line-height:2; }
+    #controls-hint b { color:#ff8000; }
+    .screen { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(0,0,0,.82); backdrop-filter:blur(6px); pointer-events:all; }
+    .screen h1 { font-size:clamp(2.5rem,8vw,5rem); font-weight:900; letter-spacing:-.03em; color:#fff; text-transform:uppercase; margin-bottom:.4rem; }
+    .screen h1 span { color:#ff8000; }
+    .screen p { color:rgba(255,255,255,.5); font-size:1rem; margin-bottom:2.5rem; letter-spacing:.08em; }
+    .btn { background:#ff8000; color:#000; border:none; font-size:.85rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; padding:1rem 3rem; border-radius:6px; cursor:pointer; transition:background .2s, transform .15s; }
+    .btn:hover { background:#ffaa33; transform:scale(1.04); }
+    .score-big { font-size:3rem; font-weight:700; color:#ff8000; margin-bottom:.5rem; }
+    #game-over { display:none; }
+    #start-screen { display:flex; }
+  </style>
 </head>
 <body>
+<canvas id="c"></canvas>
 
-    <!-- Hidden img tag to force Google to find the Khatarnak Image -->
-    <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=600&q=80" alt="satishaviator game plane thumbnail" class="seo-image">
-
-    <div id="gate">
-        <!-- Pure SVG Red Plane on Start Screen -->
-        <svg class="tap-plane" onclick="startApp()" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.605h-5l-4-7h-3l2 7h-5l-2-2h-2l1 4-1 4h2l2-2h5l-2 7h3l4-7h5c.293 0 .726-.117.928-.605.228-.549.228-1.246 0-1.79z" fill="#e50914"/>
-        </svg>
-        <h1 onclick="startApp()">satishaviator</h1>
-        <button onclick="startApp()">START GAME</button>
+<div id="ui">
+  <div id="hud" style="display:none">
+    <div class="hud-box">
+      <div class="hud-label">Speed</div>
+      <div class="hud-val"><span id="h-speed">0</span> <small style="font-size:.9rem;color:#ff8000">km/h</small></div>
     </div>
-
-    <!-- AUDIO FILES -->
-    <audio id="bgMusic" loop src="https://www.soundjay.com/ambient/sounds/office-ambience-01.mp3"></audio> 
-    <audio id="flySnd" loop src="https://www.soundjay.com/mechanical/sounds/engine-hum-02.mp3"></audio>
-    <audio id="crashSnd" src="https://www.soundjay.com/misc/sounds/fail-buzzer-01.mp3"></audio>
-
-    <div class="app">
-        <div class="header">
-            <div class="logo" onclick="tapLogo()">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.605h-5l-4-7h-3l2 7h-5l-2-2h-2l1 4-1 4h2l2-2h5l-2 7h3l4-7h5c.293 0 .726-.117.928-.605.228-.549.228-1.246 0-1.79z" fill="#e50914"/>
-                </svg>
-                satishaviator
-            </div>
-            <div class="bal-box">₹ <span id="balance">40000.00</span></div>
-        </div>
-
-        <div class="game-area" id="game-area">
-            <div class="grid-layer"></div>
-            <div class="bg-text">satishaviator</div>
-            <div id="curve"></div>
-            
-            <!-- Pure Red Jet inside Game -->
-            <svg id="plane" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.605h-5l-4-7h-3l2 7h-5l-2-2h-2l1 4-1 4h2l2-2h5l-2 7h3l4-7h5c.293 0 .726-.117.928-.605.228-.549.228-1.246 0-1.79z" fill="#e50914"/>
-            </svg>
-            
-            <div id="multiplier" style="display:none;">1.00x</div>
-            <div id="timer">WAITING... 3</div>
-        </div>
-
-        <div class="bet-section">
-            <div class="bet-card">
-                <input type="number" id="amt-1" value="10" min="10" max="8000" onblur="validate(this)">
-                <button class="btn btn-bet" id="btn-1" onclick="handle(1)">BET</button>
-            </div>
-            <div class="bet-card">
-                <input type="number" id="amt-2" value="10" min="10" max="8000" onblur="validate(this)">
-                <button class="btn btn-bet" id="btn-2" onclick="handle(2)">BET</button>
-            </div>
-        </div>
-
-        <div class="chat-section">
-            <div class="chat-header">Live All Bets</div>
-            <div class="chat-list" id="chat-content"></div>
-        </div>
+    <div class="hud-box">
+      <div class="hud-label">Score</div>
+      <div class="hud-val" id="h-score">0</div>
     </div>
+    <div class="hud-box">
+      <div class="hud-label">Level</div>
+      <div class="hud-val" id="h-level">1</div>
+    </div>
+  </div>
 
-    <script>
-        let balance = 40000;
-        let isFlying = false;
-        let mult = 1.00;
-        let crashAt = 0;
-        let loop;
-        let bets = { 1: { active: false, amt: 0 }, 2: { active: false, amt: 0 } };
+  <div id="speed-bar-wrap" style="display:none">
+    <div id="speed-bar-bg"><div id="speed-bar"></div></div>
+    <div id="speed-label">Throttle</div>
+  </div>
 
-        const bgMusic = document.getElementById('bgMusic');
-        const flySnd = document.getElementById('flySnd');
-        const crashSnd = document.getElementById('crashSnd');
-        const gameArea = document.getElementById('game-area');
+  <div id="controls-hint" style="display:none">
+    <b>W / ↑</b> Accelerate<br>
+    <b>S / ↓</b> Brake<br>
+    <b>A / ←</b> Left<br>
+    <b>D / →</b> Right<br>
+    <b>SPACE</b> Handbrake
+  </div>
 
-        function startApp() {
-            document.getElementById('gate').style.display = 'none';
-            bgMusic.volume = 0.2; 
-            bgMusic.play();
-            
-            setInterval(genChat, 1200);
-            newRound();
-        }
+  <div class="screen" id="start-screen">
+    <h1><span>SATISH</span> RACER</h1>
+    <p>Dodge traffic. Survive. Dominate.</p>
+    <button class="btn" onclick="startGame()">Start Racing</button>
+  </div>
 
-        function tapLogo() {
-            alert("Welcome to satishaviator Official Game! Keep Playing & Winning!");
-        }
+  <div class="screen" id="game-over">
+    <h1>Game <span>Over</span></h1>
+    <div class="score-big" id="final-score">0</div>
+    <p>FINAL SCORE</p>
+    <button class="btn" onclick="restartGame()">Try Again</button>
+  </div>
+</div>
 
-        function validate(el) {
-            if (el.value > 8000) el.value = 8000;
-            if (el.value < 10 || el.value === "") el.value = 10;
-        }
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161/build/three.module.js';
 
-        function handle(id) {
-            let btn = document.getElementById('btn-'+id);
-            let input = document.getElementById('amt-'+id);
-            let val = parseFloat(input.value);
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
 
-            if (isNaN(val) || val < 10) val = 10;
-            if (val > 8000) val = 8000;
-            input.value = val;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a1a);
+scene.fog = new THREE.FogExp2(0x0a0a1a, 0.018);
 
-            if(!isFlying && !bets[id].active) {
-                if(balance >= val) {
-                    balance -= val;
-                    document.getElementById('balance').innerText = balance.toFixed(2);
-                    bets[id] = { active: true, amt: val };
-                    btn.className = "btn btn-waiting";
-                    btn.innerText = "WAITING...";
-                    input.disabled = true;
-                } else {
-                    alert("Not enough balance!");
-                }
-            } else if(isFlying && bets[id].active) {
-                let win = bets[id].amt * mult;
-                balance += win;
-                document.getElementById('balance').innerText = balance.toFixed(2);
-                bets[id].active = false;
-                btn.className = "btn btn-lost";
-                btn.innerText = "WON ₹" + win.toFixed(2);
-            }
-        }
+const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 500);
+camera.position.set(0, 5, -12);
 
-        function newRound() {
-            isFlying = false; mult = 1.00;
-            document.getElementById('multiplier').style.display = 'none';
-            document.getElementById('multiplier').style.color = "#fff";
-            document.getElementById('timer').style.display = 'block';
-            document.getElementById('curve').style.width = '0%';
-            document.getElementById('plane').style.display = 'none';
-            gameArea.classList.remove('speed-up'); 
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
 
-            [1, 2].forEach(id => {
-                let btn = document.getElementById('btn-'+id);
-                let input = document.getElementById('amt-'+id);
-                if(bets[id].active) { 
-                    btn.className = "btn btn-cashout"; 
-                    btn.innerText = "CASH OUT"; 
-                } else { 
-                    btn.className = "btn btn-bet"; 
-                    btn.innerText = "BET"; 
-                    input.disabled = false;
-                }
-            });
+// Lighting
+const ambient = new THREE.AmbientLight(0x223366, 1.2);
+scene.add(ambient);
+const sun = new THREE.DirectionalLight(0xffeedd, 2.5);
+sun.position.set(10, 30, 10);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048,2048);
+sun.shadow.camera.near = 1; sun.shadow.camera.far = 200;
+sun.shadow.camera.left = -80; sun.shadow.camera.right = 80;
+sun.shadow.camera.top = 80; sun.shadow.camera.bottom = -80;
+scene.add(sun);
+const carLight = new THREE.PointLight(0xff6600, 3, 12);
+scene.add(carLight);
 
-            let sec = 3;
-            let t = setInterval(() => {
-                document.getElementById('timer').innerText = "WAITING... " + sec;
-                sec--;
-                if(sec < 0) { clearInterval(t); startFlight(); }
-            }, 1000);
-        }
+// Road
+const ROAD_W = 16, ROAD_SEG_LEN = 40, NUM_SEGS = 12;
+const roadMat = new THREE.MeshStandardMaterial({ color:0x1a1a22, roughness:.55, metalness:.1 });
+const roadSegs = [];
+for (let i=0; i<NUM_SEGS; i++) {
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(ROAD_W, 0.18, ROAD_SEG_LEN), roadMat);
+  mesh.receiveShadow = true;
+  mesh.position.set(0, -0.09, -i * ROAD_SEG_LEN);
+  scene.add(mesh); roadSegs.push(mesh);
+}
 
-        function startFlight() {
-            isFlying = true;
-            document.getElementById('timer').style.display = 'none';
-            document.getElementById('multiplier').style.display = 'block';
-            document.getElementById('plane').style.display = 'block';
-            document.getElementById('plane').classList.add('jet-active');
-            
-            gameArea.classList.add('speed-up');
+// Lane markings
+const lineMat = new THREE.MeshStandardMaterial({ color:0xffff88, emissive:0xaaaa00, emissiveIntensity:.4, roughness:1 });
+const laneLines = [];
+function makeLaneLine(x, z) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(.18, 0.05, 2.5), lineMat);
+  m.position.set(x, 0.01, z); scene.add(m); laneLines.push(m);
+}
+for (let i=0; i<NUM_SEGS*5; i++) {
+  makeLaneLine(-ROAD_W/6, -i*8);
+  makeLaneLine(ROAD_W/6, -i*8);
+}
 
-            flySnd.volume = 0.5;
-            flySnd.play();
+// Edge lines
+const edgeMat = new THREE.MeshStandardMaterial({ color:0xff4400, emissive:0xff2200, emissiveIntensity:.5, roughness:1 });
+const edgeLines = [];
+function makeEdgeLine(x, z) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(.3, 0.06, ROAD_SEG_LEN), edgeMat);
+  m.position.set(x, 0.02, z); scene.add(m); edgeLines.push(m);
+}
+for (let i=0; i<NUM_SEGS; i++) {
+  makeEdgeLine(-ROAD_W/2+.15, -i*ROAD_SEG_LEN);
+  makeEdgeLine(ROAD_W/2-.15, -i*ROAD_SEG_LEN);
+}
 
-            let r = Math.random();
-            crashAt = r < 0.05 ? 1.00 : (r < 0.8 ? 1.1 + Math.random()*3 : 5 + Math.random()*120);
-            if(crashAt === 1.00) { crash(); return; }
+// Sidewalks
+const sidewalkMat = new THREE.MeshStandardMaterial({ color:0x2a2a3a, roughness:.9 });
+for (let i=0; i<NUM_SEGS; i++) {
+  [-1,1].forEach(side => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(4, 0.28, ROAD_SEG_LEN), sidewalkMat);
+    m.receiveShadow = true;
+    m.position.set(side*(ROAD_W/2+2), -0.05, -i*ROAD_SEG_LEN);
+    scene.add(m);
+  });
+}
 
-            loop = setInterval(() => {
-                mult += (mult * 0.0035) + 0.001;
-                if(mult >= crashAt) { crash(); }
-                else {
-                    document.getElementById('multiplier').innerText = mult.toFixed(2) + "x";
-                    let p = Math.min((mult-1)/3.8, 1);
-                    document.getElementById('curve').style.width = (p*100) + "%";
-                    document.getElementById('curve').style.height = (p*100) + "%";
-                    document.getElementById('plane').style.bottom = (p*220) + "px";
-                    document.getElementById('plane').style.left = (p*350) + "px";
+// Buildings
+const rng = (a,b) => a + Math.random()*(b-a);
+const buildingColors = [0x1a2a4a, 0x2a1a3a, 0x1a3a2a, 0x3a2a1a, 0x1a1a3a];
+function makeBuilding(x, z) {
+  const w=rng(3,8), d=rng(4,9), h=rng(6,28);
+  const mat = new THREE.MeshStandardMaterial({ color:buildingColors[Math.floor(Math.random()*buildingColors.length)], roughness:.7, metalness:.2 });
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  m.castShadow = true; m.receiveShadow = true;
+  m.position.set(x, h/2, z); scene.add(m);
+  const winMat = new THREE.MeshStandardMaterial({ color:0x88ccff, emissive:0x4488ff, roughness:.1, metalness:.8 });
+  const wRows=Math.floor(h/3), wCols=Math.floor(w/2);
+  for (let wr=0; wr<wRows; wr++) for (let wc=0; wc<wCols; wc++) {
+    if (Math.random()<.3) continue;
+    const wm = new THREE.Mesh(new THREE.BoxGeometry(.5,.6,.05), winMat.clone());
+    wm.material.emissiveIntensity = Math.random()>.5 ? .9 : .1;
+    wm.position.set(x - w/2+1.2 + wc*2, wr*3+1.5, z - d/2-.03);
+    scene.add(wm);
+  }
+}
+for (let seg=0; seg<NUM_SEGS; seg++) {
+  for (let i=0; i<6; i++) {
+    const z = -seg*ROAD_SEG_LEN - i*rng(6,12);
+    makeBuilding(-(ROAD_W/2+4+rng(1,4)), z);
+    makeBuilding(ROAD_W/2+4+rng(1,4), z);
+  }
+}
 
-                    [1,2].forEach(id => {
-                        if(bets[id].active) {
-                            document.getElementById('btn-'+id).innerText = "CASH OUT ₹" + (bets[id].amt * mult).toFixed(2);
-                        }
-                    });
-                }
-            }, 50);
-        }
+// Street lamps
+const lampMat = new THREE.MeshStandardMaterial({ color:0x333344, roughness:.6 });
+const lampGlowMat = new THREE.MeshStandardMaterial({ color:0xffeeaa, emissive:0xffcc44, emissiveIntensity:2, roughness:1 });
+function makeLamp(x, z) {
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,5,8), lampMat);
+  pole.position.set(x, 2.5, z); scene.add(pole);
+  const head = new THREE.Mesh(new THREE.BoxGeometry(.8,.15,.5), lampMat);
+  head.position.set(x+(x>0?-.4:.4), 5.1, z); scene.add(head);
+  const bulb = new THREE.Mesh(new THREE.SphereGeometry(.12,8,8), lampGlowMat);
+  bulb.position.set(x+(x>0?-.4:.4), 4.9, z); scene.add(bulb);
+  const pl = new THREE.PointLight(0xffeeaa, 1.5, 14);
+  pl.position.set(x+(x>0?-.4:.4), 4.8, z); scene.add(pl);
+}
+for (let i=0; i<NUM_SEGS*3; i++) {
+  makeLamp(-(ROAD_W/2+.5), -i*14);
+  makeLamp(ROAD_W/2+.5, -i*14);
+}
 
-        function crash() {
-            clearInterval(loop); isFlying = false;
-            
-            flySnd.pause(); flySnd.currentTime = 0;
-            crashSnd.volume = 1.0;
-            crashSnd.play();
+// Stars
+const starVerts = [];
+for (let i=0; i<3000; i++) starVerts.push(rng(-400,400), rng(20,200), rng(-600,100));
+const starGeo = new THREE.BufferGeometry();
+starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starVerts,3));
+scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color:0xffffff, size:.25 })));
 
-            document.getElementById('multiplier').innerText = "FLEW AWAY!";
-            document.getElementById('multiplier').style.color = "#e50914";
-            document.getElementById('plane').classList.remove('jet-active');
-            
-            gameArea.classList.remove('speed-up');
+// Player Car
+const CAR_HALF_W = 0.85;
+const car = new THREE.Group();
+const bodyMat = new THREE.MeshStandardMaterial({ color:0xff6600, roughness:.25, metalness:.8 });
+const body = new THREE.Mesh(new THREE.BoxGeometry(1.7,0.55,3.8), bodyMat);
+body.position.set(0,0.6,0); body.castShadow=true; car.add(body);
+const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.3,0.5,2.0), new THREE.MeshStandardMaterial({ color:0x222244, roughness:.15, metalness:.5 }));
+cabin.position.set(0,1.1,-0.1); cabin.castShadow=true; car.add(cabin);
+const glassMat = new THREE.MeshStandardMaterial({ color:0x66aaff, transparent:true, opacity:.5, roughness:.1, metalness:.9 });
+const ws = new THREE.Mesh(new THREE.BoxGeometry(1.25,.4,0.05), glassMat);
+ws.position.set(0,1.1,.9); car.add(ws);
+const rs = new THREE.Mesh(new THREE.BoxGeometry(1.25,.4,0.05), glassMat);
+rs.position.set(0,1.1,-1.1); car.add(rs);
+const hood = new THREE.Mesh(new THREE.BoxGeometry(1.6,.06,1.3), new THREE.MeshStandardMaterial({ color:0x111111, roughness:.3, metalness:.9 }));
+hood.position.set(0,.88,1.1); car.add(hood);
 
-            [1,2].forEach(id => {
-                if(bets[id].active) {
-                    let btn = document.getElementById('btn-'+id);
-                    btn.className = "btn btn-lost";
-                    btn.innerText = "LOST";
-                }
-                bets[id].active = false;
-            });
-            setTimeout(newRound, 3000);
-        }
+const wheelMat = new THREE.MeshStandardMaterial({ color:0x111111, roughness:.9, metalness:.2 });
+const rimMat = new THREE.MeshStandardMaterial({ color:0xcccccc, roughness:.2, metalness:.9 });
+const wheels = [];
+[[-1,0,1.2],[1,0,1.2],[-1,0,-1.2],[1,0,-1.2]].forEach(([x,y,z]) => {
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(.36,.36,.28,18), wheelMat);
+  t.rotation.z=Math.PI/2; t.position.set(x,y,z); t.castShadow=true; car.add(t);
+  const r = new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,.3,6), rimMat);
+  r.rotation.z=Math.PI/2; r.position.set(x,y,z); car.add(r);
+  wheels.push(t);
+});
 
-        function genChat() {
-            const list = document.getElementById('chat-content');
-            
-            const names = ["satishaviator", "Aman_99", "Rahul_Pro", "satishaviator", "Priya_Avi", "Vikash_ME"];
-            let u = names[Math.floor(Math.random()*names.length)];
-            
-            let avatar = "";
-            let extraClass = "";
-            
-            if(u === "satishaviator") {
-                avatar = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
-                extraClass = "highlight-satish"; 
-            } else {
-                avatar = `https://i.pravatar.cc/100?u=${u}`;
-            }
+const headMat = new THREE.MeshStandardMaterial({ color:0xffffff, emissive:0xffffff, emissiveIntensity:3, roughness:1 });
+[-0.55,0.55].forEach(x => {
+  const h = new THREE.Mesh(new THREE.BoxGeometry(.28,.16,.05), headMat);
+  h.position.set(x,0.65,1.92); car.add(h);
+  const hl = new THREE.SpotLight(0xffffff, 8, 30, Math.PI/7, .4);
+  hl.position.set(x,.65,1.92); hl.target.position.set(x,.1,10);
+  scene.add(hl); scene.add(hl.target);
+});
+const tailMat = new THREE.MeshStandardMaterial({ color:0xff1111, emissive:0xff0000, emissiveIntensity:2, roughness:1 });
+[-0.55,0.55].forEach(x => {
+  const tl = new THREE.Mesh(new THREE.BoxGeometry(.28,.16,.05), tailMat);
+  tl.position.set(x,0.65,-1.92); car.add(tl);
+});
+car.position.set(0, 0.36, 0);
+scene.add(car);
 
-            let m = (1.1 + Math.random()*6).toFixed(2);
-            let b = [10, 50, 100, 500, 700, 2000, 8000][Math.floor(Math.random()*7)];
+// Traffic
+const trafficColors = [0x2244ff, 0x22aa44, 0xaa2222, 0xdddd00, 0xaa44aa, 0x44aaaa];
+const traffic = [];
+const LANES = [-ROAD_W/3+1, 0, ROAD_W/3-1];
+function makeTrafficCar(x, z, speed) {
+  const g = new THREE.Group();
+  const bdy = new THREE.Mesh(new THREE.BoxGeometry(1.6,.5,3.4), new THREE.MeshStandardMaterial({ color:trafficColors[Math.floor(Math.random()*trafficColors.length)], roughness:.3, metalness:.7 }));
+  bdy.position.y=.55; bdy.castShadow=true; g.add(bdy);
+  const cab = new THREE.Mesh(new THREE.BoxGeometry(1.2,.44,1.8), new THREE.MeshStandardMaterial({ color:0x111133, roughness:.2, metalness:.5 }));
+  cab.position.set(0,1.02,-.1); g.add(cab);
+  [[-.8,0,1.1],[.8,0,1.1],[-.8,0,-1.1],[.8,0,-1.1]].forEach(([wx,wy,wz]) => {
+    const wm = new THREE.Mesh(new THREE.CylinderGeometry(.33,.33,.25,12), wheelMat);
+    wm.rotation.z=Math.PI/2; wm.position.set(wx,wy,wz); g.add(wm);
+  });
+  const tlm = new THREE.MeshStandardMaterial({ color:0xff2200, emissive:0xff1100, emissiveIntensity:1.5, roughness:1 });
+  [-.55,.55].forEach(tx => {
+    const tl = new THREE.Mesh(new THREE.BoxGeometry(.22,.12,.04), tlm);
+    tl.position.set(tx,.58,-1.72); g.add(tl);
+  });
+  g.position.set(x, 0.36, z); scene.add(g);
+  traffic.push({ mesh:g, speed, bbox:new THREE.Box3() });
+}
+for (let i=0; i<12; i++) {
+  makeTrafficCar(LANES[Math.floor(Math.random()*LANES.length)], -rng(30, NUM_SEGS*ROAD_SEG_LEN-10), rng(0.04,0.14));
+}
 
-            let row = document.createElement('div');
-            row.className = `chat-msg ${extraClass}`;
-            
-            row.innerHTML = `
-                <div class="user-box">
-                    <img src="${avatar}" alt="${u}">
-                    <div class="user-name">${u}</div>
-                </div>
-                <div class="win-info">
-                    <span class="win-mult">${m}x</span>
-                    <span class="win-amt">Cashed Out ₹${(b*m).toFixed(0)}</span>
-                </div>`;
-            
-            list.prepend(row);
-            
-            if(list.children.length > 60) list.removeChild(list.lastChild);
-        }
-    </script>
+// Input
+const keys = {};
+document.addEventListener('keydown', e => keys[e.code]=true);
+document.addEventListener('keyup',   e => keys[e.code]=false);
+
+// Game State
+let gameRunning=false, carSpeed=0, carX=0, carAngle=0;
+let score=0, level=1, totalDist=0;
+const MAX_SPEED=0.55, ACCEL=0.006, BRAKE=0.009, FRICTION=0.003, STEER=0.045;
+const ROAD_HALF = ROAD_W/2 - CAR_HALF_W - .3;
+
+window.startGame = function() {
+  document.getElementById('start-screen').style.display='none';
+  document.getElementById('hud').style.display='flex';
+  document.getElementById('speed-bar-wrap').style.display='block';
+  document.getElementById('controls-hint').style.display='block';
+  gameRunning=true;
+};
+window.restartGame = function() {
+  document.getElementById('game-over').style.display='none';
+  document.getElementById('hud').style.display='flex';
+  document.getElementById('speed-bar-wrap').style.display='block';
+  carSpeed=0; carX=0; score=0; level=1; totalDist=0;
+  car.position.set(0,0.36,0); carAngle=0;
+  gameRunning=true;
+};
+function showGameOver() {
+  gameRunning=false;
+  document.getElementById('hud').style.display='none';
+  document.getElementById('speed-bar-wrap').style.display='none';
+  document.getElementById('controls-hint').style.display='none';
+  document.getElementById('final-score').textContent=Math.floor(score);
+  document.getElementById('game-over').style.display='flex';
+}
+
+const carBBox = new THREE.Box3();
+const carSize = new THREE.Vector3(1.7, 1, 3.8);
+const clock = new THREE.Clock();
+let wheelRot = 0;
+
+function update(dt) {
+  if (!gameRunning) return;
+  const gas   = keys['ArrowUp']    || keys['KeyW'];
+  const brake = keys['ArrowDown']  || keys['KeyS'];
+  const left  = keys['ArrowLeft']  || keys['KeyA'];
+  const right = keys['ArrowRight'] || keys['KeyD'];
+  const hand  = keys['Space'];
+
+  if (gas)        carSpeed = Math.min(carSpeed + ACCEL, MAX_SPEED + level*0.015);
+  else if (brake) carSpeed = Math.max(carSpeed - (hand ? BRAKE*2.5 : BRAKE), 0);
+  else            carSpeed = Math.max(carSpeed - FRICTION, 0);
+
+  if (left  && carSpeed>.005) carX = Math.max(carX - STEER*(carSpeed/MAX_SPEED+.3), -ROAD_HALF);
+  if (right && carSpeed>.005) carX = Math.min(carX + STEER*(carSpeed/MAX_SPEED+.3), ROAD_HALF);
+
+  const targetAngle = left ? -.12 : right ? .12 : 0;
+  carAngle += (targetAngle - carAngle) * .14;
+
+  car.position.z += carSpeed * 60 * dt;
+  car.position.x = carX;
+  car.rotation.z = carAngle * -.7;
+
+  wheelRot += carSpeed * 3;
+  wheels.forEach((w,i) => { w.rotation.x = wheelRot * (i<2?1:-1); });
+
+  const camZ = car.position.z;
+  roadSegs.forEach(seg => { if (seg.position.z < camZ - ROAD_SEG_LEN*2) seg.position.z += NUM_SEGS*ROAD_SEG_LEN; });
+  laneLines.forEach(l => { if (l.position.z < camZ - 80) l.position.z += NUM_SEGS*8*5; });
+  edgeLines.forEach(l => { if (l.position.z < camZ - ROAD_SEG_LEN*2) l.position.z += NUM_SEGS*ROAD_SEG_LEN; });
+
+  carBBox.setFromCenterAndSize(car.position.clone().add(new THREE.Vector3(0,.5,0)), carSize);
+  let crashed = false;
+  traffic.forEach(t => {
+    t.mesh.position.z += t.speed * 60 * dt;
+    if (t.mesh.position.z < camZ - ROAD_SEG_LEN*2) {
+      t.mesh.position.z = camZ + rng(40, 120);
+      t.mesh.position.x = LANES[Math.floor(Math.random()*LANES.length)];
+      t.speed = rng(0.04, 0.12 + level*0.01);
+    }
+    t.bbox.setFromObject(t.mesh);
+    if (carBBox.intersectsBox(t.bbox)) crashed = true;
+  });
+  if (crashed && carSpeed > 0.05) { showGameOver(); return; }
+
+  totalDist += carSpeed * 60 * dt;
+  score += carSpeed * 8;
+  level = 1 + Math.floor(totalDist / 300);
+
+  const camTarget = new THREE.Vector3(carX*.3, 5, camZ - 12);
+  camera.position.lerp(camTarget, .08);
+  camera.lookAt(carX*.2, 1.2, camZ + 8);
+  carLight.position.copy(car.position).add(new THREE.Vector3(0,2,0));
+
+  const kmh = Math.round(carSpeed * 250);
+  document.getElementById('h-speed').textContent = kmh;
+  document.getElementById('h-score').textContent = Math.floor(score);
+  document.getElementById('h-level').textContent = level;
+  document.getElementById('speed-bar').style.width = Math.min(kmh/220*100,100)+'%';
+}
+
+function render() {
+  requestAnimationFrame(render);
+  const dt = Math.min(clock.getDelta(), .05);
+  update(dt);
+  renderer.render(scene, camera);
+}
+render();
+</script>
 </body>
 </html>
